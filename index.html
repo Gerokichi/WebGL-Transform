@@ -1,0 +1,67 @@
+<body>
+ <canvas id="glCanvas" width="1200" height="700">
+  <script src="js/glmatrix/gl-matrix.js"></script>
+  <script src="js/GUI_Cube_sliders.js"></script>
+ </canvas>
+ <link rel="stylesheet" type="text/css"
+       href="css/style.css">
+
+<!-- Rotation-->
+
+ <h3> Rotation X </h3>
+ <div class="slidecontainer">
+  <input type="range" min="0" max="1000" value="180"
+         class="slider" id="rotXrange"
+         oninput="sliderRChange(this.value, 'x')" >
+ </div>
+ <h3> Rotation Y </h3>
+ <div class="slidecontainer">
+  <input type="range" min="0" max="1000" value="180"
+         class="slider" id="rotYrange"
+         oninput="sliderRChange(this.value, 'y')" >
+ </div>
+ <h3> Rotation Z </h3>
+ <div class="slidecontainer">
+  <input type="range" min="0" max="1000" value="180"
+         class="slider" id="rotZrange"
+         oninput="sliderRChange(this.value, 'z')" >
+ </div>
+
+ <!-- Translate-->
+
+ <h3> Translate X </h3>
+ <div class="slidecontainer">
+  <input type="range" min="-1000" max="1000" value="0.0"
+         class="slider" id="translateXrange"
+         oninput="sliderTxChange(this.value)" >
+ </div>
+ <h3> Translate Y </h3>
+ <div class="slidecontainer">
+  <input type="range" min="-1000" max="1000" value="0.0"
+         class="slider" id="translateYrange"
+         oninput="sliderTyChange(this.value)" >
+ </div>
+ <h3> Translate Z </h3>
+ <div class="slidecontainer">
+  <input type="range" min="-1000" max="1000" value="0.0"
+         class="slider" id="translateZrange"
+         oninput="sliderTzChange(this.value)" >
+ </div>
+
+
+ <!-- Translate-->
+
+
+ <p></p>
+ <h3> Background Color </h3>
+ <button class="button" onclick="setBckColor(0.0, 1.0, 0.0)"
+ >Green</button>
+ <button class="button button2" onclick="setBckColor(0.0, 0.0,
+1.0)">Blue</button>
+ <button class="button button3" onclick="setBckColor(1.0, 0.0,
+0.0)">Red</button>
+ <button class="button button4" onclick="setBckColor(0.7, 0.7,
+0.7)">Gray</button>
+ <button class="button button5" onclick="setBckColor(0.0, 0.0,
+0.0)">Black</button>
+</body>
