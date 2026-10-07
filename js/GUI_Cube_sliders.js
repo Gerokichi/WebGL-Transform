@@ -32,7 +32,7 @@ function sliderRChange(val, mode) {
     sliderRxVal = document.getElementById(smer).innerHTML / 150;
 }
 
-function sliderTxChange(val, mode) {
+function sliderTChange(val, mode) {
     let smer = null;
 
     if (mode === "x") {
@@ -58,12 +58,12 @@ function sliderRChange(val, mode) {
     else if (mode === "z") sliderRzVal = angle;
 }
 
-function sliderTxChange(val, mode) {
+function sliderTChange(val, mode) {
     const dl = val / 500;
 
-    if (mode === "x")      sliderRxVal = dl;
-    else if (mode === "y") sliderRyVal = dl;
-    else if (mode === "z") sliderRzVal = dl;
+    if (mode === "x")      sliderTxVal = dl;
+    else if (mode === "y") sliderTyVal = dl;
+    else if (mode === "z") sliderTzVal = dl;
 }
 //*/
 
@@ -297,11 +297,11 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
 
     mat4.translate(modelViewMatrix,     // cielova matica
         modelViewMatrix,                // matica posunu
-        [sliderTyVal, 0.0, 0.0]);     // parametre posunu, podla nacitaneho slajdra
+        [0.0, sliderTyVal, 0.0]);     // parametre posunu, podla nacitaneho slajdra
 
     mat4.translate(modelViewMatrix,     // cielova matica
         modelViewMatrix,                // matica posunu
-        [sliderTzVal, 0.0, 0.0]);     // parametre posunu, podla nacitaneho slajdra
+        [0.0, 0.0, sliderTzVal]);     // parametre posunu, podla nacitaneho slajdra
 
     mat4.rotate(modelViewMatrix,        // cielova matica
         modelViewMatrix,                // rotacna matica
@@ -440,13 +440,36 @@ function loadShader(gl, type, source) {
 
 document.addEventListener('keypress', (event) => {
     const keyName = event.key;
-    if(keyName === "r" )
+    let mode;
+
+    if(keyName === "k" )
     { r= 0.4; }
-    else if(keyName === "g"){
+    else if(keyName === "q"){
         g= 0.4;
     }
     else if(keyName === "b"){
         b= 0.4;
+    }
+    else if(keyName === "g"){
+        mode = 'trans'
+    }
+    else if(keyName === "r"){
+        mode = 'rot'
+    }
+    else if(keyName === "s"){
+        mode = 'scale'
+    }
+    else if(keyName === "ArrowUp"){
+
+    }
+    else if(keyName === "ArrowDown"){
+
+    }
+    else if(keyName === "ArrowLeft"){
+        b= 0.4;
+    }
+    else if(keyName === "ArrowRight"){
+
     }
 //nastavenie hodnoty červenej zložky farby (RED) na 0.4
 });
