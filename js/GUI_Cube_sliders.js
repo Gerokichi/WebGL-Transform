@@ -2,6 +2,7 @@ var cubeRotation = 0.0;
 var sliderRxVal = 0; var sliderRyVal = 0; var sliderRzVal = 0;
 var sliderTxVal = 0.0; var sliderTyVal = 0.0; var sliderTzVal = 0.0;
 var sliderSxVal = 1.0; var sliderSyVal = 1.0; var sliderSzVal = 1.0;
+var sliderSVal = 1.0;
 var r = 0.0; var g = 0.0; var b = 0.0;
 
 main();
@@ -40,6 +41,7 @@ function sliderSChange(val, mode) {
     if (mode === "x") smer = 'scaleXrange'
     else if (mode === "y") smer = 'scaleYrange'
     else if (mode === "z") smer = 'scaleYrange'
+    else if (mode === "o") smer = 'uniformScale'
 
     document.getElementById(smer).innerHTML = val;
     sliderTxVal = document.getElementById(smer).innerHTML / 500;
@@ -69,6 +71,7 @@ function sliderSChange(val, mode) {
     if (mode === "x")      sliderSxVal = dl;
     else if (mode === "y") sliderSyVal = dl;
     else if (mode === "z") sliderSzVal = dl;
+    else if (mode === "o") sliderSVal = dl;
 }
 //*/
 
@@ -318,6 +321,10 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
     mat4.scale(modelViewMatrix,
         modelViewMatrix,
         [sliderSxVal, sliderSyVal, sliderSzVal]);
+
+    mat4.scale(modelViewMatrix,
+        modelViewMatrix,
+        [sliderSVal, sliderSVal, sliderSVal]);
 
     // Teraz sa urci (format) WebGL, ako ma vytiahnut pozicie z vrcholoveho buffera a vlozit do atributov vertexPosition
 

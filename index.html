@@ -38,14 +38,14 @@
 
  <!-- Translate-->
  <div class="slidegroupe">
-  <div class="slidegroupeitem">
-   <h3> Translate X </h3>
-   <div class="slidecontainer">
-    <input type="range" min="-4000" max="4000" value="0.0"
-           class="slider" id="translateXrange"
-           oninput="sliderTChange(this.value, 'x')" >
-   </div>
-  </div>
+<!--  <div class="slidegroupeitem">-->
+<!--   <h3> Translate X </h3>-->
+<!--   <div class="slidecontainer">-->
+<!--    <input type="range" min="-4000" max="4000" value="0.0"-->
+<!--           class="slider" id="translateXrange"-->
+<!--           oninput="sliderTChange(this.value, 'x')" >-->
+<!--   </div>-->
+<!--  </div>-->
 
   <div class="slidegroupeitem">
    <h3> Translate Y </h3>
@@ -55,6 +55,15 @@
            oninput="sliderTChange(this.value, 'y')" >
    </div>
   </div>
+
+   <div class="slidegroupeitem">
+    <h3> Uniform Scale </h3>
+    <div class="slidecontainer">
+     <input type="range" min="1" max="500" value="100.0"
+            class="slider" id="uniformScale"
+            oninput="sliderSChange(this.value, 'o')" >
+    </div>
+   </div>
 
   <div class="slidegroupeitem">
    <h3> Translate Z </h3>
