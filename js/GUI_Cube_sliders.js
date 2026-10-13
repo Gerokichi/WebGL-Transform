@@ -4,6 +4,7 @@ var sliderTxVal = 0.0; var sliderTyVal = 0.0; var sliderTzVal = 0.0;
 var sliderSxVal = 1.0; var sliderSyVal = 1.0; var sliderSzVal = 1.0;
 var sliderSVal = 1.0;
 var r = 0.0; var g = 0.0; var b = 0.0;
+var keyMode = 'rot';
 
 main();
 
@@ -446,38 +447,81 @@ function loadShader(gl, type, source) {
     return shader;
 }
 
-document.addEventListener('keypress', (event) => {
+
+
+function keyActions(val, mode) {
+    let smer = null;
+
+    if (keyMode === 'rot') {
+        if (mode === 'x') smer = 'rotXrange';
+        else if (mode === 'y') smer = 'rotYrange';
+        else if (mode === 'z') smer = 'rotZrange';
+
+        const newVal = Number(document.getElementById(smer).value) + val;
+
+        document.getElementById(smer).value = newVal;
+        sliderRChange(document.getElementById(smer).value, mode);
+    }
+
+    else if (keyMode === 'trans') {
+        // if (mode === 'x') smer = 'translateXrange';
+        // else
+
+        if (mode === 'y') smer = 'translateYrange';
+        else if (mode === 'z') smer = 'translateZrange';
+
+        const newVal = Number(document.getElementById(smer).value) + val;
+
+        document.getElementById(smer).value = newVal;
+        sliderTChange(document.getElementById(smer).value, mode);
+    }
+
+    else if (keyMode === 'scale') {
+        if (mode === 'x') smer = 'scaleXrange';
+        else if (mode === 'y') smer = 'scaleYrange';
+        else if (mode === 'z') smer = 'scaleZrange';
+
+        const newVal = Number(document.getElementById(smer).value) + val;
+
+        document.getElementById(smer).value = newVal;
+        sliderSChange(document.getElementById(smer).value, mode);
+    }
+}
+
+
+document.addEventListener('keydown', (event) => {
     const keyName = event.key;
-    let mode;
 
-    if(keyName === "k" )
-    { r= 0.4; }
-    else if(keyName === "q"){
-        g= 0.4;
-    }
-    else if(keyName === "b"){
-        b= 0.4;
-    }
-    else if(keyName === "g"){
-        mode = 'trans'
-    }
-    else if(keyName === "r"){
-        mode = 'rot'
-    }
-    else if(keyName === "s"){
-        mode = 'scale'
-    }
-    else if(keyName === "ArrowUp"){
-
-    }
-    else if(keyName === "ArrowDown"){
-
+    if(keyName === "k" ) r = 0.4;
+    else if(keyName === "q") g = 0.4;
+    else if(keyName === "b") b = 0.4;
+    else if(keyName === "g") keyMode = 'trans';
+    else if(keyName === "r") keyMode = 'rot';
+    else if(keyName === "s") keyMode = 'scale';
+    else if(keyName === "ArrowRight"){
+        event.preventDefault();
+        keyActions(5, 'y')
     }
     else if(keyName === "ArrowLeft"){
-        b= 0.4;
+        event.preventDefault();
+        keyActions(-5, 'y')
     }
-    else if(keyName === "ArrowRight"){
+    else if(keyName === "ArrowDown"){
+        event.preventDefault();
+        keyActions(-5, 'x')
+    }
+    else if(keyName === "ArrowUp"){
+        event.preventDefault();
+        keyActions(5, 'x')
+    }
+    else if(keyName === "Backspace"){
+        event.preventDefault();
+        keyActions(-5, 'z')
+    }
+    else if(keyName === "Shift"){
+        event.preventDefault();
+        keyActions(5, 'z')
+    }
 
-    }
 //nastavenie hodnoty červenej zložky farby (RED) na 0.4
 });
