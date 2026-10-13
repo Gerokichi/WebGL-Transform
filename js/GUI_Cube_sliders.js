@@ -1,10 +1,7 @@
 var cubeRotation = 0.0;
-var sliderRxVal = 360;
-var sliderRyVal = 360;
-var sliderRzVal = 360;
-var sliderTxVal = 0.0;
-var sliderTyVal = 0.0;
-var sliderTzVal = 0.0;
+var sliderRxVal = 0; var sliderRyVal = 0; var sliderRzVal = 0;
+var sliderTxVal = 0.0; var sliderTyVal = 0.0; var sliderTzVal = 0.0;
+var sliderSxVal = 1.0; var sliderSyVal = 1.0; var sliderSzVal = 1.0;
 var r = 0.0; var g = 0.0; var b = 0.0;
 
 main();
@@ -18,15 +15,9 @@ function setBckColor(inr,ing,inb) {
 function sliderRChange(val, mode) {
     let smer = null;
 
-    if (mode === "x") {
-        smer = 'rotXrange'
-    }
-    else if (mode === "y") {
-        smer = 'rotYrange'
-    }
-    else if (mode === "z") {
-        smer = 'rotZrange'
-    }
+    if (mode === "x") smer = 'rotXrange'
+    else if (mode === "y") smer = 'rotYrange'
+    else if (mode === "z") smer = 'rotZrange'
 
     document.getElementById(smer).innerHTML = val;
     sliderRxVal = document.getElementById(smer).innerHTML / 150;
@@ -35,15 +26,20 @@ function sliderRChange(val, mode) {
 function sliderTChange(val, mode) {
     let smer = null;
 
-    if (mode === "x") {
-        smer = 'translateXrange'
-    }
-    else if (mode === "y") {
-        smer = 'translateYrange'
-    }
-    else if (mode === "z") {
-        smer = 'translateZrange'
-    }
+    if (mode === "x") smer = 'translateXrange'
+    else if (mode === "y") smer = 'translateYrange'
+    else if (mode === "z") smer = 'translateZrange'
+
+    document.getElementById(smer).innerHTML = val;
+    sliderTxVal = document.getElementById(smer).innerHTML / 500;
+}
+
+function sliderSChange(val, mode) {
+    let smer = null;
+
+    if (mode === "x") smer = 'scaleXrange'
+    else if (mode === "y") smer = 'scaleYrange'
+    else if (mode === "z") smer = 'scaleYrange'
 
     document.getElementById(smer).innerHTML = val;
     sliderTxVal = document.getElementById(smer).innerHTML / 500;
@@ -51,7 +47,7 @@ function sliderTChange(val, mode) {
 
 //* Alternacia vycitavania hodnot z html
 function sliderRChange(val, mode) {
-    const angle = val / 150;
+    const angle = val * Math.PI / 180;
 
     if (mode === "x")      sliderRxVal = angle;
     else if (mode === "y") sliderRyVal = angle;
@@ -63,7 +59,16 @@ function sliderTChange(val, mode) {
 
     if (mode === "x")      sliderTxVal = dl;
     else if (mode === "y") sliderTyVal = dl;
-    else if (mode === "z") sliderTzVal = dl;
+    else if (mode === "z") sliderTzVal = -dl;
+}
+
+function sliderSChange(val, mode) {
+    let dl = val / 100;
+    if (dl === 0) dl = 1.0
+
+    if (mode === "x")      sliderSxVal = dl;
+    else if (mode === "y") sliderSyVal = dl;
+    else if (mode === "z") sliderSzVal = dl;
 }
 //*/
 
@@ -260,7 +265,7 @@ function initBuffers(gl) {
 //
 function drawScene(gl, programInfo, buffers, deltaTime) {
     gl.clearColor(r, g, b, 1.0);  // Nastavenie farby pozadia na ciernu
-    gl.clearDepth(1.0);                 // vymazanie/inicializacia vsetkeho
+    gl.clearDepth(1.0);           // vymazanie/inicializacia vsetkeho
     gl.enable(gl.DEPTH_TEST);           // Povolenie hlbkoveho testovania
     gl.depthFunc(gl.LEQUAL);            // Nastavenie rezimu: Blízke objekty budu zakryvat vzdialene objekty
 
@@ -291,17 +296,9 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
     // Teraz sa vykonaju transformacie posunu a rotacie podla nacitanych parametrov
     // s posunom pozicie kreslenia tam, kam sa zacne kreslit stvorec steny
 
-    mat4.translate(modelViewMatrix,     // cielova matica
-        modelViewMatrix,                // matica posunu
-        [sliderTxVal, 0.0, - 8.0]);     // parametre posunu, podla nacitaneho slajdra
-
-    mat4.translate(modelViewMatrix,     // cielova matica
-        modelViewMatrix,                // matica posunu
-        [0.0, sliderTyVal, 0.0]);     // parametre posunu, podla nacitaneho slajdra
-
-    mat4.translate(modelViewMatrix,     // cielova matica
-        modelViewMatrix,                // matica posunu
-        [0.0, 0.0, sliderTzVal]);     // parametre posunu, podla nacitaneho slajdra
+    mat4.translate(modelViewMatrix,                          // cielova matica
+        modelViewMatrix,                                     // matica posunu
+        [sliderTxVal, sliderTyVal, sliderTzVal - 8.0]);      // parametre posunu, podla nacitaneho slajdra
 
     mat4.rotate(modelViewMatrix,        // cielova matica
         modelViewMatrix,                // rotacna matica
@@ -311,12 +308,16 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
     mat4.rotate(modelViewMatrix,        // cielova matica
         modelViewMatrix,                // rotacna matica
         sliderRxVal,                    // uhol rotacie v radianoch, podla nacitaneho slajdra
-        [1, 0, 0]);                     // os rotacie (Y)
+        [1, 0, 0]);                     // os rotacie (X)
 
     mat4.rotate(modelViewMatrix,        // cielova matica
         modelViewMatrix,                // rotacna matica
         sliderRzVal,                    // uhol rotacie v radianoch, podla nacitaneho slajdra
-        [0, 0, 1]);
+        [0, 0, 1]);                     // os rotacie (Z)
+
+    mat4.scale(modelViewMatrix,
+        modelViewMatrix,
+        [sliderSxVal, sliderSyVal, sliderSzVal]);
 
     // Teraz sa urci (format) WebGL, ako ma vytiahnut pozicie z vrcholoveho buffera a vlozit do atributov vertexPosition
 

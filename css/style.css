@@ -2,9 +2,20 @@
     width: 100%;
 }
 
+.slidegroupe {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.slidegroupeitem {
+    display: flex;
+    flex-direction: column;
+}
+
 .slider {
     -webkit-appearance: none;
-    width: 800px;
+    width: 478px;
     height: 30px;
     background: #d3d3d3;
     outline: none;

@@ -1,5 +1,5 @@
 <body>
- <canvas id="glCanvas" width="1200" height="700">
+ <canvas id="glCanvas" width="1505" height="500">
   <script src="js/glmatrix/gl-matrix.js"></script>
   <script src="js/GUI_Cube_sliders.js"></script>
  </canvas>
@@ -7,50 +7,94 @@
        href="css/style.css">
 
 <!-- Rotation-->
+ <div class="slidegroupe">
+  <div class="slidegroupeitem">
+   <h3> Rotation X </h3>
+   <div class="slidecontainer">
+    <input type="range" min="0" max="360" value="0"
+           class="slider" id="rotXrange"
+           oninput="sliderRChange(this.value, 'x')" >
+   </div>
+  </div>
 
- <h3> Rotation X </h3>
- <div class="slidecontainer">
-  <input type="range" min="0" max="1000" value="180"
-         class="slider" id="rotXrange"
-         oninput="sliderRChange(this.value, 'x')" >
- </div>
- <h3> Rotation Y </h3>
- <div class="slidecontainer">
-  <input type="range" min="0" max="1000" value="180"
-         class="slider" id="rotYrange"
-         oninput="sliderRChange(this.value, 'y')" >
- </div>
- <h3> Rotation Z </h3>
- <div class="slidecontainer">
-  <input type="range" min="0" max="1000" value="180"
-         class="slider" id="rotZrange"
-         oninput="sliderRChange(this.value, 'z')" >
+  <div class="slidegroupeitem">
+   <h3> Rotation Y </h3>
+   <div class="slidecontainer">
+    <input type="range" min="0" max="360" value="0"
+           class="slider" id="rotYrange"
+           oninput="sliderRChange(this.value, 'y')" >
+   </div>
+  </div>
+
+  <div class="slidegroupeitem">
+   <h3> Rotation Z </h3>
+   <div class="slidecontainer">
+    <input type="range" min="0" max="360" value="0"
+           class="slider" id="rotZrange"
+           oninput="sliderRChange(this.value, 'z')" >
+   </div>
+  </div>
  </div>
 
  <!-- Translate-->
+ <div class="slidegroupe">
+  <div class="slidegroupeitem">
+   <h3> Translate X </h3>
+   <div class="slidecontainer">
+    <input type="range" min="-4000" max="4000" value="0.0"
+           class="slider" id="translateXrange"
+           oninput="sliderTChange(this.value, 'x')" >
+   </div>
+  </div>
 
- <h3> Translate X </h3>
- <div class="slidecontainer">
-  <input type="range" min="-1000" max="1000" value="0.0"
-         class="slider" id="translateXrange"
-         oninput="sliderTChange(this.value, 'x')" >
+  <div class="slidegroupeitem">
+   <h3> Translate Y </h3>
+   <div class="slidecontainer">
+    <input type="range" min="-1000" max="1000" value="0.0"
+           class="slider" id="translateYrange"
+           oninput="sliderTChange(this.value, 'y')" >
+   </div>
+  </div>
+
+  <div class="slidegroupeitem">
+   <h3> Translate Z </h3>
+   <div class="slidecontainer">
+    <input type="range" min="0" max="20000" value="0.0"
+           class="slider" id="translateZrange"
+           oninput="sliderTChange(this.value, 'z')" >
+   </div>
+  </div>
  </div>
- <h3> Translate Y </h3>
- <div class="slidecontainer">
-  <input type="range" min="-1000" max="1000" value="0.0"
-         class="slider" id="translateYrange"
-         oninput="sliderTChange(this.value, 'y')" >
+
+ <!-- Scale-->
+ <div class="slidegroupe">
+  <div class="slidegroupeitem">
+   <h3> Scale X </h3>
+   <div class="slidecontainer">
+    <input type="range" min="-1000" max="1000" value="0.0"
+           class="slider" id="scaleXrange"
+           oninput="sliderSChange(this.value, 'x')" >
+   </div>
+  </div>
+
+  <div class="slidegroupeitem">
+   <h3> Scale Y </h3>
+   <div class="slidecontainer">
+    <input type="range" min="-1000" max="1000" value="0.0"
+           class="slider" id="scaleYrange"
+           oninput="sliderSChange(this.value, 'y')" >
+   </div>
+  </div>
+
+  <div class="slidegroupeitem">
+   <h3> Scale Z </h3>
+   <div class="slidecontainer">
+    <input type="range" min="-1000" max="1000" value="0.0"
+           class="slider" id="scaleZrange"
+           oninput="sliderSChange(this.value, 'z')" >
+   </div>
+  </div>
  </div>
- <h3> Translate Z </h3>
- <div class="slidecontainer">
-  <input type="range" min="-1000" max="1000" value="0.0"
-         class="slider" id="translateZrange"
-         oninput="sliderTChange(this.value, 'z')" >
- </div>
-
-
- <!-- Translate-->
-
 
  <p></p>
  <h3> Background Color </h3>
